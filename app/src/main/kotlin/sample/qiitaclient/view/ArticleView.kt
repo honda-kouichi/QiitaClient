@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import org.w3c.dom.Text
 import sample.qiitaclient.R
 import sample.qiitaclient.model.Article
 import java.util.jar.Attributes
@@ -27,21 +28,24 @@ class ArticleView: FrameLayout {
                 attrs: AttributeSet?,
                 defStyleAttr: Int,
                 defStyleRes: Int) : super(context, attrs, defStyleAttr, defStyleRes)
-
-    var profileImageView: ImageView? = null
-    var titleTextView: TextView? = null
-    var userNameTextView: TextView? = null
+    
+    val profileImageView: ImageView by lazy {
+        findViewById(R.id.profile_image_view) as ImageView
+    }
+    val titleTextView: TextView by lazy {
+        findViewById(R.id.title_text_view) as TextView
+    }
+    val userNameTextView: TextView by lazy {
+        findViewById(R.id.user_name_text_view) as TextView
+    }
 
     init {
         LayoutInflater.from(context).inflate(R.layout.view_article, this)
-        profileImageView = findViewById(R.id.profile_image_view) as ImageView
-        titleTextView = findViewById(R.id.title_text_view) as TextView
-        userNameTextView = findViewById(R.id.user_name_text_view) as TextView
     }
 
     fun setArticle(article: Article) {
-        titleTextView?.text = article.title
-        userNameTextView?.text = article.user.name
-        profileImageView?.setBackgroundColor(Color.RED)
+        titleTextView.text = article.title
+        userNameTextView.text = article.user.name
+        profileImageView.setBackgroundColor(Color.RED)
     }
 }
